@@ -597,7 +597,8 @@ void *USBD_static_malloc(uint32_t size)
     that it is an even number and higher than 3 
 	AUDIO_OUT_PACKET_NUM = 80
   */
-  static uint8_t mem[512];
+//  static uint8_t mem[AUDIO_TOTAL_BUF_SIZE];
+	uint8_t* mem = malloc(size);
   /* USER CODE END 4 */
   return mem;
 }

@@ -50,7 +50,9 @@
   */
 
 /* USER CODE BEGIN PRIVATE_TYPES */
-
+extern DAC_HandleTypeDef hdac;
+extern TIM_HandleTypeDef htim2;
+extern DMA_HandleTypeDef hdma_dac_ch1;
 /* USER CODE END PRIVATE_TYPES */
 
 /**
@@ -89,7 +91,8 @@
   */
 
 /* USER CODE BEGIN PRIVATE_VARIABLES */
-
+extern DAC_HandleTypeDef hdac;
+extern TIM_HandleTypeDef htim2;
 /* USER CODE END PRIVATE_VARIABLES */
 
 /**
@@ -125,7 +128,8 @@ static int8_t AUDIO_PeriodicTC_FS(uint8_t cmd);
 static int8_t AUDIO_GetState_FS(void);
 
 /* USER CODE BEGIN PRIVATE_FUNCTIONS_DECLARATION */
-
+//extern DAC_HandleTypeDef hdac;
+//extern TIM_HandleTypeDef htim2;
 /* USER CODE END PRIVATE_FUNCTIONS_DECLARATION */
 
 /**
@@ -180,14 +184,21 @@ static int8_t AUDIO_DeInit_FS(uint32_t options)
 static int8_t AUDIO_AudioCmd_FS(uint8_t* pbuf, uint32_t size, uint8_t cmd)
 {
   /* USER CODE BEGIN 2 */
-  switch(cmd)
-  {
-    case AUDIO_CMD_START:
-    break;
-
-    case AUDIO_CMD_PLAY:
-    break;	
-  }
+//	if(size == 0)
+//	{
+//		USBD_AUDIO_Sync(&hUsbDeviceFS, AUDIO_OFFSET_UNKNOWN);
+//		return USBD_OK;
+//	}
+//  switch(cmd)
+//  {
+//    case AUDIO_CMD_START:
+//    	HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, pbuf, size, DAC_ALIGN_8B_R);
+//    	HAL_TIM_OC_Start_IT(&htim2,TIM_CHANNEL_1);
+//    break;
+//    case AUDIO_CMD_PLAY:
+//    	HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, pbuf, size, DAC_ALIGN_8B_R);
+//    break;
+//  }
   return (USBD_OK);
   /* USER CODE END 2 */
 }
@@ -246,6 +257,7 @@ static int8_t AUDIO_GetState_FS(void)
 void TransferComplete_CallBack_FS(void)
 {
   /* USER CODE BEGIN 7 */
+//	HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
   USBD_AUDIO_Sync(&hUsbDeviceFS, AUDIO_OFFSET_FULL);
   /* USER CODE END 7 */
 }
@@ -257,6 +269,7 @@ void TransferComplete_CallBack_FS(void)
 void HalfTransfer_CallBack_FS(void)
 {
   /* USER CODE BEGIN 8 */
+//	HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
   USBD_AUDIO_Sync(&hUsbDeviceFS, AUDIO_OFFSET_HALF);
   /* USER CODE END 8 */
 }

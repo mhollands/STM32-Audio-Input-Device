@@ -50,7 +50,7 @@ extern "C" {
 #define USBD_MAX_NUM_INTERFACES                       1U
 #endif /* USBD_AUDIO_FREQ */
 
-#define AUDIO_OUT_EP                                  0x01U
+//#define AUDIO_OUT_EP                                  0x01U
 #define USB_AUDIO_CONFIG_DESC_SIZ                     0x6DU
 #define AUDIO_INTERFACE_DESC_SIZE                     0x09U
 #define USB_AUDIO_DESC_SIZ                            0x09U
